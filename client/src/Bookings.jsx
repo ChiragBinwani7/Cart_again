@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Booking = () => {
   const { state } = useLocation();
@@ -23,7 +23,8 @@ const Booking = () => {
         distance: Number(distance),
         date,
       });
-      if (res.data.ok) {
+
+      if (res.data.message === "Booking done") {
         setMessage("Booking done!");
       } else {
         setMessage("Booking failed!");

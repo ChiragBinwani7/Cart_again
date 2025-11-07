@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 
 const Car = () => {
@@ -63,7 +63,9 @@ const Car = () => {
   }
 
   return (
+    
     <div className="container mt-4">
+      <Navbar />
       <h3>Available Cars</h3>
 
       <div className="mb-3">

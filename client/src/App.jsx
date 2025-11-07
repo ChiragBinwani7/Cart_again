@@ -1,8 +1,8 @@
 import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Car from "./Car";
-import Booking from "./Booking";
+import Car from './Car';
+import Booking from "./Bookings";
 import Cart from "./Cart";
 
 const App = () => {

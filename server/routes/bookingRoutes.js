@@ -9,15 +9,17 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  
   try {
-    const {carName, category, pricePerKm, distance, date } = req.body;
+    const { carName, category, pricePerKm, distance, date } = req.body;
     const total = distance * pricePerKm;
-    const newBooking = new Booking({carName, category, pricePerKm, distance, date, total });
+    const newBooking = new Booking({ carName, category, pricePerKm, distance, date, total });
     await newBooking.save();
     await Car.findOneAndUpdate({ name: carName }, { isAvailable: false });
-    res.json({booking: newBooking });
-  } catch {
-    res.status(500).json({message: "Error creating booking" });
+    res.json({ message: "Booking done", booking: newBooking });
+  } catch (err) {
+    console.log("Booking error:", err);
+    res.status(500).json({ ok: false, message: "Error creating booking" });
   }
 });
 

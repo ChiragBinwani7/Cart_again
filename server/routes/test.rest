@@ -1,0 +1,27 @@
+POST http://localhost:5000/api/cars HTTP/1.1
+content-type: application/json
+
+{
+    
+    
+    "name": "Honda City",
+    "pricePerKm": 12,
+    "desc": "Luxurious Car/ 5 Seater",
+    "category": "SUV",
+    "photo": "/photos/chevelet.jpeg", 
+    "isAvailable":true
+}
+
+
+###
+
+DELETE http://localhost:5000/api/cars/690ca43ba9b46d3b065caaca
+
+
+
+
+
+###
+
+GET http://localhost:5000/api/cars
+

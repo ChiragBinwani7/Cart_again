@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Navbar from "./Navbar";
 const Cart = () => {
   const [bookings, setBookings] = useState([]);
 
@@ -27,7 +27,9 @@ const Cart = () => {
   }, []);
 
   return (
+    
     <div className="container mt-4">
+      <Navbar />
       <h3>My Bookings</h3>
       <table className="table table-bordered text-center">
         <thead>
