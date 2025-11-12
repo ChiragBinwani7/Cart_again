@@ -5,8 +5,8 @@ const carSchema = new mongoose.Schema({
   pricePerKm: Number,
   desc: String,
   category: String,
-  photo: String, 
-  isAvailable: { type: Boolean, default: true }
+  photo: String,
+  bookedDates: [Date] 
 });
 
 module.exports = mongoose.model("Car", carSchema);

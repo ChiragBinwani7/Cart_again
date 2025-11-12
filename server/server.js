@@ -7,6 +7,7 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/photos", express.static("photos"));
 
 mongoose.connect("mongodb://127.0.0.1:27017/cart_rental_demo")
   .then(() => console.log("MongoDB connected"))

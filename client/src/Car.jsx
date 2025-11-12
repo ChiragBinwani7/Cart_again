@@ -1,24 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 
 const Car = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const [cars, setCars] = useState([]);
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
-
-  const login = () => {
-    if (email === "chirag@gmail.com" && pass === "1234") {
-      setLoggedIn(true);
-      getCars();
-    } else {
-      alert("wrong id or password");
-    }
-  };
 
   const getCars = async () => {
     try {
@@ -29,6 +17,10 @@ const Car = () => {
     }
   };
 
+  useEffect(() => {
+    getCars();
+  }, []);
+
   const goBook = (car) => {
     navigate("/booking", { state: { car } });
   };
@@ -38,47 +30,34 @@ const Car = () => {
       ? cars
       : cars.filter((x) => x.category.toLowerCase() === filter);
 
-  if (!loggedIn) {
-    return (
-      <div className="container mt-5" style={{ width: "300px" }}>
-        <h3>Login</h3>
-        <label>Email</label>
-        <input
-          className="form-control mb-2"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control mb-2"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-        />
-        <button className="btn btn-primary w-100" onClick={login}>
-          Login
-        </button>
-      </div>
-    );
-  }
-
   return (
-    
     <div className="container mt-4">
       <Navbar />
       <h3>Available Cars</h3>
 
       <div className="mb-3">
-        <button className="btn btn-outline-primary me-2" onClick={() => setFilter("all")}>
+        <button
+          className="btn btn-outline-primary me-2"
+          onClick={() => setFilter("all")}
+        >
           All
         </button>
-        <button className="btn btn-outline-primary me-2" onClick={() => setFilter("suv")}>
+        <button
+          className="btn btn-outline-primary me-2"
+          onClick={() => setFilter("suv")}
+        >
           SUV
         </button>
-        <button className="btn btn-outline-primary me-2" onClick={() => setFilter("sedan")}>
+        <button
+          className="btn btn-outline-primary me-2"
+          onClick={() => setFilter("sedan")}
+        >
           Sedan
         </button>
-        <button className="btn btn-outline-primary" onClick={() => setFilter("compact")}>
+        <button
+          className="btn btn-outline-primary"
+          onClick={() => setFilter("compact")}
+        >
           Compact
         </button>
       </div>
@@ -88,7 +67,7 @@ const Car = () => {
           <p>No cars found</p>
         ) : (
           filteredCars.map((x) => (
-            <div className="col-md-4 mb-4" key={x.name}>
+            <div className="col-md-4 mb-4" key={x._id}>
               <div className="card h-100">
                 <img
                   src={x.photo}

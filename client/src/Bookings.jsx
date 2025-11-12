@@ -8,7 +8,6 @@ const Booking = () => {
   const car = state?.car;
   const [distance, setDistance] = useState("");
   const [date, setDate] = useState("");
-  const [message, setMessage] = useState("");
 
   const bookNow = async () => {
     if (distance === "" || date === "") {
@@ -25,9 +24,9 @@ const Booking = () => {
       });
 
       if (res.data.message === "Booking done") {
-        setMessage("Booking done!");
+        alert(`Booking confirmed for ${car.name} on ${date}`);
       } else {
-        setMessage("Booking failed!");
+        alert(res.data.message || "Booking failed!");
       }
     } catch {
       alert("error booking car");
@@ -45,19 +44,11 @@ const Booking = () => {
 
   return (
     <div className="container mt-4" style={{ width: "300px" }}>
+      <Navbar />
       <h3>Book Car</h3>
       <p><b>{car.name}</b></p>
       <p>Category: {car.category}</p>
       <p>₹{car.pricePerKm} per km</p>
-
-      <label>Distance (km)</label>
-      <input
-        className="form-control mb-2"
-        type="number"
-        value={distance}
-        onChange={(e) => setDistance(e.target.value)}
-      />
-
       <label>Date</label>
       <input
         className="form-control mb-2"
@@ -65,13 +56,16 @@ const Booking = () => {
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-
+      <label>Distance (km)</label>
+      <input
+        className="form-control mb-2"
+        type="number"
+        value={distance}
+        onChange={(e) => setDistance(e.target.value)}
+      />
       <button className="btn btn-primary w-100" onClick={bookNow}>
         Confirm Booking
       </button>
-
-      <p className="mt-2" style={{ color: "green" }}>{message}</p>
-
       <a href="/" className="btn btn-secondary w-100 mt-3">
         Back
       </a>

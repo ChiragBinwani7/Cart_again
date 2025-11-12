@@ -3,14 +3,18 @@ const router = express.Router();
 const Car = require("../model/Car");
 
 router.get("/", async (req, res) => {
-  const cars = await Car.find({ isAvailable: true });
-  res.json(cars);
+  try {
+    const cars = await Car.find();
+    res.json(cars);
+  } catch {
+    res.status(500).json({ message: "Error fetching cars" });
+  }
 });
 
 router.post("/", async (req, res) => {
   try {
-    const { name, pricePerKm, desc, category, photo } = req.body;
-    const newCar = new Car({ name, pricePerKm, desc, category, photo });
+    const { name, pricePerKm, desc, category, photo, bookedDates } = req.body;
+    const newCar = new Car({ name, pricePerKm, desc, category, photo, bookedDates });
     await newCar.save();
     res.json({ message: "Car added successfully", car: newCar });
   } catch {
